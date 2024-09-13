@@ -1,0 +1,73 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class EventRegistrationForm {
+    private JFrame frame;
+ private JTextField nameField;
+    private JTextField emailField;
+    private JTextField phoneField;
+    private JComboBox<String> membershipComboBox;
+
+    public EventRegistrationForm() {
+        createGUI();
+    }
+
+    private void createGUI() {
+        frame = new JFrame("Event Registration Form");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 500);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(5, 2));
+
+        JLabel nameLabel = new JLabel("Name:");
+        panel.add(nameLabel);
+        nameField = new JTextField(20);
+        panel.add(nameField);
+
+        JLabel emailLabel = new JLabel("Email:");
+        panel.add(emailLabel);
+        emailField = new JTextField(20);
+        panel.add(emailField);
+
+        JLabel phoneLabel = new JLabel("Phone:");
+        panel.add(phoneLabel);
+        phoneField = new JTextField(20);
+        panel.add(phoneField);
+
+        JLabel membershipLabel = new JLabel("Membership Status:");
+        panel.add(membershipLabel);
+        String[] membershipOptions = {"Incoming Member", "Outgoing Member"};
+        membershipComboBox = new JComboBox<>(membershipOptions);
+        panel.add(membershipComboBox);
+
+        JButton registerButton = new JButton("Register");
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameField.getText();
+                String email = emailField.getText();
+                String phone = phoneField.getText();
+                String membership = (String) membershipComboBox.getSelectedItem();
+
+                // Add code to register the user here
+                System.out.println("Registered user: " + name + ", " + email + ", " + phone + ", " + membership);
+            }
+        });
+        panel.add(registerButton);
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new EventRegistrationForm();
+            }
+        });
+    }
+}
